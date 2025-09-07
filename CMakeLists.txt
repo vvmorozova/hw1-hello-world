@@ -84,3 +84,8 @@ if(WITH_BOOST_TEST)
     enable_testing()
     add_test(test_version test_version)
 endif()
+
+enable_testing()
+add_subdirectory(googletest)
+ dd_executable(test_app gtest_main.cpp)
+target_link_libraries(test_app gtest_main)
