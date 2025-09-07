@@ -1,7 +1,9 @@
-#include "gtest/gtest.h
+#include <gtest/gtest.h>
+#include "lib.h"
+#include "version.h"
 
-TEST(VersionTest,ValideVersion) {
-    EXPECT_GT(version(), 0); // Assertion: Expect Factorial(0) to equal 1
+TEST(VersionTest,ValidVersion) {
+    EXPECT_EQ(version(), PROJECT_VERSION_PATCH);
 }
 
 int main(int argc, char **argv) {
