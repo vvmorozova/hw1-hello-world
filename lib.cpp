@@ -53,7 +53,7 @@ int ip_filter() {
     std::vector<std::vector<std::string>> ip_pool;
 
     for (std::string line; std::getline(std::cin, line);) {
-      std::vector<std::string> str = split(line, ' ');
+      std::vector<std::string> str = split(line, '\t');
       ip_pool.push_back(split(str.at(0), '.'));
     }
 
@@ -68,9 +68,8 @@ int ip_filter() {
       return true;
     };
     std::sort(ip_pool.begin(), ip_pool.end(), compFunc);
-    std::cout << "ip_pool len" << ip_pool.size() << std::endl;
 
-    //print_ips(ip_pool);
+    print_ips(ip_pool);
     
     auto firstByteIs1 = [](std::vector<std::string> ip) -> bool {
       if (ip[0] == "1") {
@@ -80,6 +79,23 @@ int ip_filter() {
     };
     print_ips(ip_pool, firstByteIs1);
     
+    auto f46s70 = [](std::vector<std::string> ip) -> bool {
+      if (ip[0] == "46" && ip[1] == "70") {
+        return true;
+      }
+      return false;
+    };
+    print_ips(ip_pool, f46s70);
+
+    auto any46 = [](std::vector<std::string> ip) -> bool {
+      for (int i = 0; i < 4; i++) {
+        if (ip[i] == "46") {
+          return true;
+        }
+      }
+      return false;
+    };
+    print_ips(ip_pool, any46);
 
   } catch (const std::exception &e) {
     std::cerr << "err func name: " << e.what() << std::endl;
