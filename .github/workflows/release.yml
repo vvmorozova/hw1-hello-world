@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - master
+      - hw2-ip-filter
       - feature/github_actions
 
 jobs:
