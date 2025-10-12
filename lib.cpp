@@ -8,6 +8,9 @@
 #include <vector>
 #include <functional>
 
+#define BYTES_IN_IPV4 4
+#define IP_PLACE_IN_INPUT_STR 0
+// string std is split into vector of strings by delimiter d
 std::vector<std::string> split(const std::string &str, char d) {
   std::vector<std::string> r;
 
@@ -25,6 +28,8 @@ std::vector<std::string> split(const std::string &str, char d) {
   return r;
 }
 
+// if an IP address from the IP pool satisfies the canBePrint condition, it is printed to stdout
+// if canBePrint is not specified, all ips are printed
 void print_ips(const std::vector<std::vector<std::string>> &ip_pool,
                 std::function<bool(const std::vector<std::string> &)> canBePrint = nullptr)
 {
@@ -35,11 +40,10 @@ void print_ips(const std::vector<std::vector<std::string>> &ip_pool,
         continue;
       }
     }
-
       int i = 0;
       for (auto currTet : currIP) {
         std::cout << currTet;
-        if (i++ < 3) {
+        if (i++ < BYTES_IN_IPV4 - 1) {
           std::cout << ".";
         }
       }
@@ -54,12 +58,13 @@ int ip_filter() {
 
     for (std::string line; std::getline(std::cin, line);) {
       std::vector<std::string> str = split(line, '\t');
-      ip_pool.push_back(split(str.at(0), '.'));
+      ip_pool.push_back(split(str.at(IP_PLACE_IN_INPUT_STR), '.'));
     }
 
-    auto compFunc = [](std::vector<std::string> fisrtIP,
+    // reverse lex comparison algo
+    auto revLex = [](std::vector<std::string> fisrtIP,
                        std::vector<std::string> secondIP) -> bool {
-      for (int i = 0; i < 4; i++) {
+      for (int i = 0; i < BYTES_IN_IPV4; i++) {
         int diff = std::stoi(fisrtIP[i]) - std::stoi(secondIP[i]);
         if (diff != 0) {
           return diff > 0 ? true : false;
@@ -67,8 +72,7 @@ int ip_filter() {
       }
       return true;
     };
-    std::sort(ip_pool.begin(), ip_pool.end(), compFunc);
-
+    std::sort(ip_pool.begin(), ip_pool.end(), revLex);
     print_ips(ip_pool);
     
     auto firstByteIs1 = [](std::vector<std::string> ip) -> bool {
@@ -88,7 +92,7 @@ int ip_filter() {
     print_ips(ip_pool, f46s70);
 
     auto any46 = [](std::vector<std::string> ip) -> bool {
-      for (int i = 0; i < 4; i++) {
+      for (int i = 0; i < BYTES_IN_IPV4; i++) {
         if (ip[i] == "46") {
           return true;
         }
