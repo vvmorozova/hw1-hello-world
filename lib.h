@@ -1,4 +1,4 @@
 #pragma once
 
-int version();
+int ip_filter();
 
