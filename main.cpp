@@ -1,10 +1,68 @@
 #include "lib.h"
 
+#include <map>
 #include <iostream>
+#include <type_traits>
+#include <functional>
+
+size_t factorial(size_t n) {
+	if (n <= 1) {
+		return 1;
+	}
+
+	size_t res = n * factorial(n - 1);
+	return res;
+}
+
+template <typename T>
+struct is_pair : std::false_type {};
+
+template <typename T1, typename T2>
+struct is_pair<std::pair<T1, T2>> : std::true_type {};
+
+
+
+template <typename Container>
+std::enable_if_t<is_pair<typename std::decay<decltype(*std::begin(std::declval<Container>()))>::type>::value, void>
+print_container(const Container &container)
+{
+	int i = 0;
+	for (auto elem : container) {
+		std::cout << "element №" << i++ << " is " << elem.second << std::endl;
+	}
+}
+
+template <typename Container>
+std::enable_if_t<!is_pair<typename std::decay<decltype(*std::begin(std::declval<Container>()))>::type>::value, void>
+print_container(const Container &container)
+{
+	int i = 0;
+	for (auto elem : container) {
+		std::cout << "element №" << i++ << " is " << elem << std::endl;
+	}
+}
 
 int main(int, char **) {
-	std::cout << "Version: " << version() << std::endl;
-	std::cout << "Hello, world!" << std::endl;
+	
+	// default map allocator
+	std::cout << "map with default allocator" << std::endl;
+	std::map<int, int> defMap;
+	for (int i = 0; i < 10; i++) {
+		defMap[i] = factorial(i);
+	}
+
+	print_container(defMap);
+
+	// map with my allocator
+	std::cout << "map with my allocator" << std::endl;
+	std::map<int, int, std::less<int>, arena_allocator<std::pair<const int, int>>> myAllocMap;
+	for (int i = 0; i < 10; i++) {
+		myAllocMap[i] = factorial(i);
+	}
+
+	print_container(myAllocMap);
+
+
 	return 0;
 } 
 
