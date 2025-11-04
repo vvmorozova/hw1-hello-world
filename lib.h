@@ -19,7 +19,7 @@ public:
 	arena_allocator() = default;
 
 	template <typename U>
-	arena_allocator(const arena_allocator<U> &) {};
+	arena_allocator(const arena_allocator<U> &) {}
 
 	T* allocate(int n) {
 		size_t bytes = n * sizeof(T);
