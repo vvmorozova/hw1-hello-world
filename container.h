@@ -28,8 +28,9 @@ public:
 
     ~light_vector() {
         clear();
-        if (data_)
-            alloc_.deallocate(data_, capacity_);
+        if (data_) {
+            std::allocator_traits<A>::deallocate(alloc_, data_, capacity_);
+		}
     }
 
     void push_back(const T& value) {
@@ -71,16 +72,16 @@ public:
 
 private:
     void reserve(size_type new_cap) {
-        T* new_data = alloc_.allocate(new_cap);
+        if (new_cap <= capacity_) {
+			return;
+		}
 
-        for (size_type i = 0; i < size_; ++i) {
-            std::allocator_traits<A>::construct(
-                alloc_, new_data + i, std::move_if_noexcept(data_[i]));
-            std::allocator_traits<A>::destroy(alloc_, data_ + i);
-        }
+		T* new_data = std::allocator_traits<A>::allocate(alloc_, new_cap);
 
-        if (data_)
-            alloc_.deallocate(data_, capacity_);
+		for (size_type i = 0; i < size_; i++) {
+			std::allocator_traits<A>::construct(alloc_, new_data + i, std::move_if_noexcept(data_[i]));
+			std::allocator_traits<A>::destroy(alloc_, data_ + i);
+		}
 
         data_ = new_data;
         capacity_ = new_cap;

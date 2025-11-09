@@ -28,7 +28,7 @@ print_container(const Container &container)
 {
 	int i = 0;
 	for (auto elem : container) {
-		std::cout << "element №" << i++ << " is " << elem.second << std::endl;
+		std::cout << "factorial of " << i++ << " is " << elem.second << std::endl;
 	}
 }
 
@@ -38,7 +38,7 @@ print_container(const Container &container)
 {
 	int i = 0;
 	for (auto elem : container) {
-		std::cout << "element №" << i++ << " is " << elem << std::endl;
+		std::cout << "factorial of " << i++ << " is " << elem << std::endl;
 	}
 }
 
@@ -56,13 +56,13 @@ int main(int argc, char ** argv) {
 	print_container(defMap);
 
 	std::cout << "\nmap with my allocator" << std::endl;
-	std::map<int, int, std::less<int>, arena_allocator<std::pair<const int, int>>> myAllocMap;
+	std::map<int, int, std::less<int>, arena_allocator<std::pair<const int, int>, 10>> myAllocMap;
 	for (int i = 0; i < 10; i++) {
 		myAllocMap[i] = factorial(i);
 	}
 	print_container(myAllocMap);
 
-	arena_allocator<std::pair<const int, int>>::cleanup();
+	arena_allocator<std::pair<const int, int>, 10>::cleanup();
 
 	std::cout << "\nmy container with default allocator" << std::endl;
 	light_vector<int> vecFact;
@@ -72,7 +72,7 @@ int main(int argc, char ** argv) {
 	print_container(vecFact);
 	
 	std::cout << "\nmy container with my allocator" << std::endl;
-	light_vector<int, arena_allocator<int>> myAllocVec;
+	light_vector<int, arena_allocator<int, 10>> myAllocVec;
 	for (int i = 0; i < 10; i++) {
 		myAllocVec.push_back (factorial(i));
 	}
