@@ -3,6 +3,8 @@
 #include <memory>
 #include <cstddef>
 
+#include "lib.h"
+
 template <class T, class A = std::allocator<T>>
 class light_vector {
 public:

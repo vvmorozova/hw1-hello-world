@@ -4,6 +4,8 @@
 #include <memory>
 #include <iostream>
 
+#include "lib.h"
+
 #define ARENA_SIZE 1024 // 1Kb
 
 template <typename T>
@@ -36,7 +38,7 @@ public:
 			return static_cast<T*>(std::malloc(bytes));
 		}
 
-		std::cerr << "receive memory" << std::endl;
+		DEBUG_PRINT("receive memory")
 		T* res = reinterpret_cast<T*>(current);
 		current += bytes;
 		used += bytes;
@@ -51,7 +53,7 @@ public:
 			free(ptr);
 		}
 		else {
-			std::cout << "ignore deallocate arena memory" << std::endl;
+			DEBUG_PRINT("ignore deallocate arena memory")
 		}
 	}
 
@@ -59,7 +61,7 @@ public:
 		if (arena) {
 			current = arena;
 			used = 0;
-			std::cout << "reset arena" << std::endl;
+			DEBUG_PRINT("reset arena")
 		}
 	} 
 	static void cleanup(){
@@ -69,7 +71,7 @@ public:
 			current = NULL;
 			used = 0;
 			initialised = false;
-			std::cout << "freed arena" << std::endl;
+			DEBUG_PRINT("freed arena")
 		}
 	}
 
@@ -90,7 +92,7 @@ private:
 		initialised = true;
 		used = 0;
 
-		std::cout << "init arena" << std::endl;
+		DEBUG_PRINT("init arena")
 		return true;
 	}
 

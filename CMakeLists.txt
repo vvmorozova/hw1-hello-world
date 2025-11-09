@@ -7,7 +7,7 @@ project(allocator VERSION ${PROJECT_VESRION})
 
 option(WITH_BOOST_TEST "Whether to build Boost test" ON)
 
-configure_file(allocator.h.in allocator.h)
+#configure_file(allocator.h.in allocator.h)
 
 add_executable(allocator_cli main.cpp)
 add_library(allocator lib.cpp)

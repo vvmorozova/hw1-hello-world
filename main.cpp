@@ -42,45 +42,42 @@ print_container(const Container &container)
 	}
 }
 
-int main(int, char **) {
+int main(int argc, char ** argv) {
 	
-	// default map allocator
-	std::cout << "map with default allocator" << std::endl;
+	if (argc == 2 && std::string(argv[1]) == "-debug") {
+		lib_debug = true;
+	}
+	
+	std::cout << "\nmap with default allocator" << std::endl;
 	std::map<int, int> defMap;
 	for (int i = 0; i < 10; i++) {
 		defMap[i] = factorial(i);
 	}
-
 	print_container(defMap);
 
-	// map with my allocator
-	std::cout << "map with my allocator" << std::endl;
+	std::cout << "\nmap with my allocator" << std::endl;
 	std::map<int, int, std::less<int>, arena_allocator<std::pair<const int, int>>> myAllocMap;
 	for (int i = 0; i < 10; i++) {
 		myAllocMap[i] = factorial(i);
 	}
-
 	print_container(myAllocMap);
 
 	arena_allocator<std::pair<const int, int>>::cleanup();
 
-	// my container with default allocator
-	std::cout << "my container with default allocator" << std::endl;
+	std::cout << "\nmy container with default allocator" << std::endl;
 	light_vector<int> vecFact;
 	for (int i = 0; i < 10; i++) {
 		vecFact.push_back (factorial(i));
 	}
 	print_container(vecFact);
 	
-	// my container with my allocator
-	std::cout << "my container with my allocator" << std::endl;
+	std::cout << "\nmy container with my allocator" << std::endl;
 	light_vector<int, arena_allocator<int>> myAllocVec;
 	for (int i = 0; i < 10; i++) {
 		myAllocVec.push_back (factorial(i));
 	}
 	print_container(myAllocVec);
 
-	arena_allocator<int>::cleanup();
 
 	return 0;
 } 
