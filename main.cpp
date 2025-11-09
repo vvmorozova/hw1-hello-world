@@ -62,6 +62,25 @@ int main(int, char **) {
 
 	print_container(myAllocMap);
 
+	arena_allocator<std::pair<const int, int>>::cleanup();
+
+	// my container with default allocator
+	std::cout << "my container with default allocator" << std::endl;
+	light_vector<int> vecFact;
+	for (int i = 0; i < 10; i++) {
+		vecFact.push_back (factorial(i));
+	}
+	print_container(vecFact);
+	
+	// my container with my allocator
+	std::cout << "my container with my allocator" << std::endl;
+	light_vector<int, arena_allocator<int>> myAllocVec;
+	for (int i = 0; i < 10; i++) {
+		myAllocVec.push_back (factorial(i));
+	}
+	print_container(myAllocVec);
+
+	arena_allocator<int>::cleanup();
 
 	return 0;
 } 

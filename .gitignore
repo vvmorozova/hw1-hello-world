@@ -1,0 +1,14 @@
+.vscode/
+CMakeCache.txt
+CMakeFiles/
+CPackConfig.cmake
+CPackSourceConfig.cmake
+CTestTestfile.cmake
+Makefile
+allocator_cli
+cmake_install.cmake
+gtest_version
+gtest_version*
+lib/
+liballocator.a
+test_version
