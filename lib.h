@@ -1,4 +1,3 @@
 #pragma once
 
-int version();
-
+#include "template_magic.h"
