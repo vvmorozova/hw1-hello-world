@@ -2,16 +2,19 @@
 
 #include <string>
 #include <iostream>
+#include <cstdint>
 
 template <typename T,
              std::enable_if_t<std::is_integral<T>::value, bool> = true>
 void print_ip(T t)
 {
 	std::string delim;
-	while (t > 0) {
-		delim = t / 256 != 0 ? "." : "\n";
-		std::cout << t % 256 << delim;
-		t /= 256;
+	int bytes = sizeof(T);
+	while (bytes > 0) {
+		uint8_t byte = (t >> ((bytes - 1) * 8)) % 256;
+		delim = bytes != 1 ? "." : "\n";
+		std::cout << unsigned(byte) << delim;
+		bytes--;
 	}
 }
 
