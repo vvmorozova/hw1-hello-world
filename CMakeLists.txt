@@ -3,14 +3,14 @@ cmake_minimum_required(VERSION 3.12)
 set(PATCH_VERSION "1" CACHE INTERNAL "Patch version")
 set(PROJECT_VESRION 0.0.${PATCH_VERSION})
 
-project(template_magic VERSION ${PROJECT_VESRION})
+project(print_ip VERSION ${PROJECT_VESRION})
 
 option(WITH_BOOST_TEST "Whether to build Boost test" ON)
 
-add_executable(template_magic_cli main.cpp template_magic.cpp)
+add_executable(print_ip main.cpp template_magic.cpp)
 add_library(template_magic lib.cpp)
 
-set_target_properties(template_magic_cli template_magic PROPERTIES
+set_target_properties(print_ip template_magic PROPERTIES
     CXX_STANDARD 14
     CXX_STANDARD_REQUIRED ON
 )
@@ -19,7 +19,7 @@ target_include_directories(template_magic
     PRIVATE "${CMAKE_BINARY_DIR}"
 )
 
-target_link_libraries(template_magic_cli PRIVATE
+target_link_libraries(print_ip PRIVATE
     template_magic
 )
 
@@ -44,7 +44,7 @@ if(WITH_BOOST_TEST)
 endif()
 
 if (MSVC)
-    target_compile_options(template_magic_cli PRIVATE
+    target_compile_options(print_ip PRIVATE
         /W4
     )
     target_compile_options(template_magic PRIVATE
@@ -56,7 +56,7 @@ if (MSVC)
         )
     endif()
 else ()
-    target_compile_options(template_magic_cli PRIVATE
+    target_compile_options(print_ip PRIVATE
         -Wall -Wextra -pedantic -Werror
     )
     target_compile_options(template_magic PRIVATE
@@ -69,7 +69,7 @@ else ()
     endif()
 endif()
 
-install(TARGETS template_magic_cli RUNTIME DESTINATION bin)
+install(TARGETS print_ip RUNTIME DESTINATION bin)
 
 set(CPACK_GENERATOR DEB)
 set(CPACK_PACKAGE_VERSION_MAJOR "${PROJECT_VERSION_MAJOR}")
