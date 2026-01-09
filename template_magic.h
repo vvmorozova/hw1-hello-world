@@ -5,6 +5,8 @@
 #include <cstdint>
 #include <vector>
 #include <list>
+#include <string>
+#include <type_traits>
 
 template <typename T,
              std::enable_if_t<std::is_integral<T>::value, bool> = true>
