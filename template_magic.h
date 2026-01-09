@@ -7,6 +7,7 @@
 #include <list>
 #include <string>
 #include <type_traits>
+#include <tuple>
 
 template <typename T,
              std::enable_if_t<std::is_integral<T>::value, bool> = true>
@@ -75,9 +76,11 @@ template<std::size_t I = 0, typename... Ts>
 typename std::enable_if<I < sizeof...(Ts), void>::type
 print_tuple(const std::tuple<Ts...>& t)
 {
-    std::cout << std::get<I>(t);
-    if (I + 1 < sizeof...(Ts))
+	const auto &val = std::get<I>(t);
+    std::cout << val;
+    if (I + 1 < sizeof...(Ts)) {
         std::cout << ".";
+	}
     print_tuple<I + 1>(t);
 }
 
