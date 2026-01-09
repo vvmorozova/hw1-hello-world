@@ -22,7 +22,7 @@ jobs:
     
     # Deploy the HTML documentation to GitHub Pages
     - name: GH Pages Deployment
-      uses: vvmorozova/hw1-hello-world@v3
+      uses: vvmorozova/hw1-hello-world@v1
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
         publish_dir: ./doc/html/
