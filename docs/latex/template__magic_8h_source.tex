@@ -1,0 +1,113 @@
+\doxysection{template\+\_\+magic.\+h}
+\hypertarget{template__magic_8h_source}{}\label{template__magic_8h_source}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ }
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ <string>}}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <iostream>}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <cstdint>}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ <vector>}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ <list>}}
+\DoxyCodeLine{00008\ }
+\DoxyCodeLine{00009\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T,}
+\DoxyCodeLine{00010\ \ \ \ \ \ \ \ \ \ \ \ \ \ std::enable\_if\_t<std::is\_integral<T>::value,\ \textcolor{keywordtype}{bool}>\ =\ \textcolor{keyword}{true}>}
+\DoxyCodeLine{00011\ \textcolor{keywordtype}{void}\ print\_ip(T\ t)}
+\DoxyCodeLine{00012\ \{}
+\DoxyCodeLine{00013\ \ \ \ \ std::string\ delim;}
+\DoxyCodeLine{00014\ \ \ \ \ \textcolor{keywordtype}{int}\ bytes\ =\ \textcolor{keyword}{sizeof}(T);}
+\DoxyCodeLine{00015\ \ \ \ \ \textcolor{keywordflow}{while}\ (bytes\ >\ 0)\ \{}
+\DoxyCodeLine{00016\ \ \ \ \ \ \ \ \ uint8\_t\ \textcolor{keywordtype}{byte}\ =\ (t\ >>\ ((bytes\ -\/\ 1)\ *\ 8))\ \%\ 256;}
+\DoxyCodeLine{00017\ \ \ \ \ \ \ \ \ delim\ =\ bytes\ !=\ 1\ ?\ \textcolor{stringliteral}{"{}."{}}\ :\ \textcolor{stringliteral}{"{}\(\backslash\)n"{}};}
+\DoxyCodeLine{00018\ \ \ \ \ \ \ \ \ std::cout\ <<\ unsigned(\textcolor{keywordtype}{byte})\ <<\ delim;}
+\DoxyCodeLine{00019\ \ \ \ \ \ \ \ \ bytes-\/-\/;}
+\DoxyCodeLine{00020\ \ \ \ \ \}}
+\DoxyCodeLine{00021\ \}}
+\DoxyCodeLine{00022\ }
+\DoxyCodeLine{00023\ \textcolor{keywordtype}{void}\ print\_ip(std::string\ str);}
+\DoxyCodeLine{00024\ }
+\DoxyCodeLine{00025\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{00026\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classis__printable}{is\_printable}}\ \{}
+\DoxyCodeLine{00027\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00028\ \ \ \ \ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ U>}
+\DoxyCodeLine{00029\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{auto}\ test(\textcolor{keywordtype}{int})\ -\/>\ \textcolor{keyword}{decltype}(std::declval<std::ostream\&>()\ <<\ std::declval<U>(),}
+\DoxyCodeLine{00030\ \ \ \ \ std::true\_type());}
+\DoxyCodeLine{00031\ }
+\DoxyCodeLine{00032\ \ \ \ \ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}>}
+\DoxyCodeLine{00033\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{auto}\ test(...)\ -\/>\ std::false\_type;}
+\DoxyCodeLine{00034\ }
+\DoxyCodeLine{00035\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00036\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{constexpr}\ \textcolor{keywordtype}{bool}\ value\ =\ \textcolor{keyword}{decltype}(test<T>(0))::value;}
+\DoxyCodeLine{00037\ \};}
+\DoxyCodeLine{00038\ }
+\DoxyCodeLine{00039\ \textcolor{comment}{//\ check\ if\ container\ vector\ of\ list}}
+\DoxyCodeLine{00040\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{00041\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structis__vec__or__list}{is\_vec\_or\_list}}\ :\ std::false\_type\ \{\};}
+\DoxyCodeLine{00042\ }
+\DoxyCodeLine{00043\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T,\ \textcolor{keyword}{typename}\ Alloc>}
+\DoxyCodeLine{00044\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structis__vec__or__list}{is\_vec\_or\_list}}<std::vector<T,\ Alloc>>\ :\ std::true\_type\ \{\};}
+\DoxyCodeLine{00045\ }
+\DoxyCodeLine{00046\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T,\ \textcolor{keyword}{typename}\ Alloc>}
+\DoxyCodeLine{00047\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structis__vec__or__list}{is\_vec\_or\_list}}<std::list<T,\ Alloc>>\ :\ std::true\_type\ \{\};}
+\DoxyCodeLine{00048\ }
+\DoxyCodeLine{00049\ \textcolor{comment}{//\ vector\ or\ list\ overload}}
+\DoxyCodeLine{00050\ template\ <typename\ Container,\ std::enable\_if\_t<is\_printable<typename\ Container::value\_type>::value\ \&\&\ }
+\DoxyCodeLine{00051\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{structis__vec__or__list}{is\_vec\_or\_list<Container>::value}},\ \textcolor{keywordtype}{bool}>\ =\ \textcolor{keyword}{true}>}
+\DoxyCodeLine{00052\ \textcolor{keyword}{auto}\ print\_ip(\textcolor{keyword}{const}\ Container\&\ cont)}
+\DoxyCodeLine{00053\ \{}
+\DoxyCodeLine{00054\ \ \ \ \ \textcolor{keywordtype}{int}\ i\ =\ 0;}
+\DoxyCodeLine{00055\ \ \ \ \ \textcolor{keywordtype}{int}\ len\ =\ cont.size();}
+\DoxyCodeLine{00056\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keyword}{const}\ \textcolor{keyword}{auto}\&\ elem\ :\ cont)\ \{}
+\DoxyCodeLine{00057\ \ \ \ \ \ \ \ \ std::cout\ <<\ elem;}
+\DoxyCodeLine{00058\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (i\ <\ len\ -\/\ 1)\ \{}
+\DoxyCodeLine{00059\ \ \ \ \ \ \ \ \ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}."{}};}
+\DoxyCodeLine{00060\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00061\ \ \ \ \ \ \ \ \ i++;}
+\DoxyCodeLine{00062\ \ \ \ \ \}}
+\DoxyCodeLine{00063\ \ \ \ \ std::cout\ <<\ std::endl;}
+\DoxyCodeLine{00064\ \}}
+\DoxyCodeLine{00065\ }
+\DoxyCodeLine{00066\ \textcolor{comment}{//\ for\ iterating\ the\ tuple}}
+\DoxyCodeLine{00067\ \textcolor{keyword}{template}<std::size\_t\ I\ =\ 0,\ \textcolor{keyword}{typename}...\ Ts>}
+\DoxyCodeLine{00068\ \textcolor{keyword}{typename}\ std::enable\_if<I\ ==\ \textcolor{keyword}{sizeof}...(Ts),\ \textcolor{keywordtype}{void}>::type}
+\DoxyCodeLine{00069\ print\_tuple(\textcolor{keyword}{const}\ std::tuple<Ts...>\&)}
+\DoxyCodeLine{00070\ \{\}}
+\DoxyCodeLine{00071\ }
+\DoxyCodeLine{00072\ \textcolor{keyword}{template}<std::size\_t\ I\ =\ 0,\ \textcolor{keyword}{typename}...\ Ts>}
+\DoxyCodeLine{00073\ \textcolor{keyword}{typename}\ std::enable\_if<I\ <\ \textcolor{keyword}{sizeof}...(Ts),\ \textcolor{keywordtype}{void}>::type}
+\DoxyCodeLine{00074\ print\_tuple(\textcolor{keyword}{const}\ std::tuple<Ts...>\&\ t)}
+\DoxyCodeLine{00075\ \{}
+\DoxyCodeLine{00076\ \ \ \ \ std::cout\ <<\ std::get<I>(t);}
+\DoxyCodeLine{00077\ \ \ \ \ \textcolor{keywordflow}{if}\ (I\ +\ 1\ <\ \textcolor{keyword}{sizeof}...(Ts))}
+\DoxyCodeLine{00078\ \ \ \ \ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}."{}};}
+\DoxyCodeLine{00079\ \ \ \ \ print\_tuple<I\ +\ 1>(t);}
+\DoxyCodeLine{00080\ \}}
+\DoxyCodeLine{00081\ }
+\DoxyCodeLine{00082\ \textcolor{comment}{//\ template\ <typename\ TupleT,\ std::size\_t\ TupSize\ =\ std::tuple\_size\_v<TupleT>>}}
+\DoxyCodeLine{00083\ \textcolor{comment}{//\ void\ printTuple(const\ TupleT\&\ tp)\ \{}}
+\DoxyCodeLine{00084\ \textcolor{comment}{//\ \ \ \ \ printTupleImp(tp,\ std::make\_index\_sequence<TupSize>\{\});}}
+\DoxyCodeLine{00085\ \textcolor{comment}{//\ \}}}
+\DoxyCodeLine{00086\ }
+\DoxyCodeLine{00087\ \textcolor{comment}{//\ check\ if\ all\ types\ in\ type\ are\ same}}
+\DoxyCodeLine{00088\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}...\ T>}
+\DoxyCodeLine{00089\ \textcolor{keyword}{struct\ }all\_same\_types\ :\ std::true\_type\ \{\};}
+\DoxyCodeLine{00090\ }
+\DoxyCodeLine{00091\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ F,\ \textcolor{keyword}{typename}\ S,\ \textcolor{keyword}{typename}...\ Other>}
+\DoxyCodeLine{00092\ \textcolor{keyword}{struct\ }all\_same\_types<F,\ S,\ Other...>\ :\ std::conditional\_t<std::is\_same<F,\ S>::value,}
+\DoxyCodeLine{00093\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ all\_same\_types<S,\ Other...>,\ std::false\_type>\ \{\};}
+\DoxyCodeLine{00094\ }
+\DoxyCodeLine{00095\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T\_TUPLE>}
+\DoxyCodeLine{00096\ \textcolor{keyword}{struct\ }is\_all\_same\_tuple;}
+\DoxyCodeLine{00097\ }
+\DoxyCodeLine{00098\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}...\ Types>}
+\DoxyCodeLine{00099\ \textcolor{keyword}{struct\ }is\_all\_same\_tuple<std::tuple<Types...>>\ :\ all\_same\_types<Types...>\ \{\};}
+\DoxyCodeLine{00100\ }
+\DoxyCodeLine{00101\ }
+\DoxyCodeLine{00102\ \textcolor{comment}{//\ tuple\ overload}}
+\DoxyCodeLine{00103\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ TUPLE\_T>}
+\DoxyCodeLine{00104\ \textcolor{keyword}{auto}\ print\_ip(TUPLE\_T\ \textcolor{keyword}{const}\&\ t)\ -\/>\ std::enable\_if\_t<is\_all\_same\_tuple<TUPLE\_T>::value,\ \textcolor{keywordtype}{void}>}
+\DoxyCodeLine{00105\ \{}
+\DoxyCodeLine{00106\ \ \ \ \ print\_tuple(t);}
+\DoxyCodeLine{00107\ \ \ \ \ std::cout\ <<\ std::endl;}
+\DoxyCodeLine{00108\ \}}
+
+\end{DoxyCode}
