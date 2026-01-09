@@ -15,6 +15,8 @@ set_target_properties(print_ip template_magic PROPERTIES
     CXX_STANDARD_REQUIRED ON
 )
 
+set(CMAKE_CXX_EXTENSIONS OFF)
+
 target_include_directories(template_magic
     PRIVATE "${CMAKE_BINARY_DIR}"
 )
