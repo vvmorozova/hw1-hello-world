@@ -5,7 +5,7 @@ set(PROJECT_VESRION 0.0.${PATCH_VERSION})
 
 project(print_ip VERSION ${PROJECT_VESRION})
 
-option(WITH_BOOST_TEST "Whether to build Boost test" ON)
+option(WITH_BOOST_TEST "Whether to build Boost test" OFF)
 
 add_executable(print_ip main.cpp template_magic.cpp)
 add_library(template_magic lib.cpp)
@@ -80,15 +80,7 @@ set(CPACK_PACKAGE_VERSION_PATCH "${PROJECT_VERSION_PATCH}")
 set(CPACK_PACKAGE_CONTACT example@example.com)
 include(CPack)
 
-#if(WITH_BOOST_TEST)
-#    enable_testing()
-#    add_test(boost_test_version boost_test_version)
-#endif()
-
-enable_testing()
-add_subdirectory(googletest)
-add_executable(gtest_version gtest_main.cpp lib.cpp)
-target_link_libraries(gtest_version GTest::gtest_main)
-
-include(GoogleTest)
-gtest_discover_tests(gtest_version)
+if(WITH_BOOST_TEST)
+    enable_testing()
+    add_test(boost_test_version boost_test_version)
+endif()
