@@ -3,22 +3,28 @@ cmake_minimum_required(VERSION 3.12)
 set(PATCH_VERSION "1" CACHE INTERNAL "Patch version")
 set(PROJECT_VESRION 0.0.${PATCH_VERSION})
 
+set(PROJECT_BIN_DIR ${CMAKE_SOURCE_DIR}/bin)
+set(PROJECT_SRC_DIR ${CMAKE_SOURCE_DIR}/src/print_ip)
+set(PROJECT_TEST_DIR ${CMAKE_SOURCE_DIR}/test)
+
 project(print_ip VERSION ${PROJECT_VESRION})
 
 option(WITH_BOOST_TEST "Whether to build Boost test" OFF)
 
-add_executable(print_ip main.cpp template_magic.cpp)
-add_library(template_magic lib.cpp)
+add_executable(print_ip ${PROJECT_SRC_DIR}/main.cpp ${PROJECT_SRC_DIR}/template_magic.cpp)
+add_library(template_magic ${PROJECT_SRC_DIR}/lib.cpp)
 
 set_target_properties(print_ip template_magic PROPERTIES
     CXX_STANDARD 14
     CXX_STANDARD_REQUIRED ON
+    RUNTIME_OUTPUT_DIRECTORY ${PROJECT_BIN_DIR}
 )
 
 set(CMAKE_CXX_EXTENSIONS OFF)
 
 target_include_directories(template_magic
     PRIVATE "${CMAKE_BINARY_DIR}"
+    PUBLIC "${PROJECT_SRC_DIR}"
 )
 
 target_link_libraries(print_ip PRIVATE
@@ -27,7 +33,7 @@ target_link_libraries(print_ip PRIVATE
 
 if(WITH_BOOST_TEST)
     find_package(Boost COMPONENTS unit_test_framework REQUIRED)
-    add_executable(test_version test_version.cpp)
+    add_executable(test_version ${PROJECT_TEST_DIR}/test_version.cpp)
 
     set_target_properties(test_version PROPERTIES
         CXX_STANDARD 14

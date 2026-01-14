@@ -1,0 +1,6 @@
+googletest\
+*.a
+*.deb
+bin\
+_CPack_Packages\
+build\
