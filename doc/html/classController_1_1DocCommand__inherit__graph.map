@@ -1,0 +1,9 @@
+<map id="Controller::DocCommand" name="Controller::DocCommand">
+<area shape="rect" id="Node000001" title=" " alt="" coords="271,5,450,91"/>
+<area shape="rect" id="Node000002" href="$classController_1_1ExportDocCommand.html" title=" " alt="" coords="5,139,225,204"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="266,99,180,141,178,136,263,94"/>
+<area shape="rect" id="Node000003" href="$classController_1_1ImportDocCommand.html" title=" " alt="" coords="250,139,471,204"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="363,104,363,138,358,138,358,104"/>
+<area shape="rect" id="Node000004" href="$classController_1_1NewDocCommand.html" title=" " alt="" coords="496,139,703,204"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="456,94,538,136,536,141,453,99"/>
+</map>
