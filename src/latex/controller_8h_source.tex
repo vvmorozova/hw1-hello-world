@@ -1,0 +1,117 @@
+\doxysection{controller.\+h}
+\hypertarget{controller_8h_source}{}\label{controller_8h_source}\mbox{\hyperlink{controller_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ }
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{model_8h}{model.h}}"{}}}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{view_8h}{view.h}}"{}}}
+\DoxyCodeLine{00005\ }
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ <iostream>}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ <vector>}}
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ <stack>}}
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#include\ <queue>}}
+\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#include\ <string>}}
+\DoxyCodeLine{00011\ \textcolor{preprocessor}{\#include\ <memory>}}
+\DoxyCodeLine{00012\ }
+\DoxyCodeLine{00013\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespaceController}{Controller}}\ \{}
+\DoxyCodeLine{00014\ \ \ \ \ \textcolor{keyword}{class\ }\mbox{\hyperlink{classController_1_1DrawCommand}{DrawCommand}}\ \{}
+\DoxyCodeLine{00015\ \ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00016\ \ \ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ \mbox{\hyperlink{classController_1_1DrawCommand_adbde66c96846737beb0e879bfb73eafc}{\string~DrawCommand}}()\ \{\};}
+\DoxyCodeLine{00017\ \ \ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classController_1_1DrawCommand_a9786aff95587577908cda0b0bd0f0069}{execute}}(std::shared\_ptr<Model::Storage>\ storage);}
+\DoxyCodeLine{00018\ \ \ \ \ \};}
+\DoxyCodeLine{00019\ }
+\DoxyCodeLine{00020\ \ \ \ \ \textcolor{keyword}{class\ }\mbox{\hyperlink{classController_1_1DrawCircle}{DrawCircle}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{classController_1_1DrawCommand}{DrawCommand}}\{}
+\DoxyCodeLine{00021\ \ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00022\ \ \ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classController_1_1DrawCircle_a4d32652ae1c685939af1bd5f0b8d447f}{execute}}(std::shared\_ptr<Model::Storage>\ storage);}
+\DoxyCodeLine{00023\ \ \ \ \ \};}
+\DoxyCodeLine{00024\ }
+\DoxyCodeLine{00025\ \ \ \ \ \textcolor{keyword}{class\ }\mbox{\hyperlink{classController_1_1DrawRectangle}{DrawRectangle}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{classController_1_1DrawCommand}{DrawCommand}}\{}
+\DoxyCodeLine{00026\ \ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00027\ \ \ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classController_1_1DrawRectangle_a9ea652ed1bcaac08783e283096fa2014}{execute}}(std::shared\_ptr<Model::Storage>\ storage);}
+\DoxyCodeLine{00028\ \ \ \ \ \};}
+\DoxyCodeLine{00029\ }
+\DoxyCodeLine{00030\ \ \ \ \ \textcolor{keyword}{class\ }\mbox{\hyperlink{classController_1_1EraseCommand}{EraseCommand}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{classController_1_1DrawCommand}{DrawCommand}}\{}
+\DoxyCodeLine{00031\ \ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00032\ \ \ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classController_1_1EraseCommand_a9914cf42676e30b5a5e7360d7c141c05}{execute}}(std::shared\_ptr<Model::Storage>\ storage);}
+\DoxyCodeLine{00033\ \ \ \ \ \};}
+\DoxyCodeLine{00034\ }
+\DoxyCodeLine{00035\ \ \ \ \ \textcolor{keyword}{class\ }\mbox{\hyperlink{classController_1_1DrawLine}{DrawLine}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{classController_1_1DrawCommand}{DrawCommand}}\{}
+\DoxyCodeLine{00036\ \ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00037\ \ \ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classController_1_1DrawLine_a43aa0bb212be511991e58df365bdc26a}{execute}}(std::shared\_ptr<Model::Storage>\ storage);}
+\DoxyCodeLine{00038\ \ \ \ \ \};}
+\DoxyCodeLine{00039\ }
+\DoxyCodeLine{00040\ \ \ \ \ \textcolor{keyword}{class\ }\mbox{\hyperlink{classController_1_1RecolorCommand}{RecolorCommand}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{classController_1_1DrawCommand}{DrawCommand}}\{}
+\DoxyCodeLine{00041\ \ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00042\ \ \ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classController_1_1RecolorCommand_a8c983b9f4a69affb13e4b231c34ebe1e}{execute}}(std::shared\_ptr<Model::Storage>\ storage);}
+\DoxyCodeLine{00043\ \ \ \ \ \};}
+\DoxyCodeLine{00044\ }
+\DoxyCodeLine{00045\ \ \ \ \ \textcolor{keyword}{class\ }\mbox{\hyperlink{classController_1_1DocCommand}{DocCommand}}\ \{}
+\DoxyCodeLine{00046\ \ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00047\ \ \ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ \mbox{\hyperlink{classController_1_1DocCommand_a0544068c451362efd873a9b22c77f3b0}{\string~DocCommand}}()\ \{\};}
+\DoxyCodeLine{00048\ \ \ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classController_1_1DocCommand_a82028494b44997db0b779cdfd2133711}{execute}}(\textcolor{keyword}{const}\ std::string\ \&\ filename);}
+\DoxyCodeLine{00049\ \ \ \ \ \};}
+\DoxyCodeLine{00050\ }
+\DoxyCodeLine{00051\ \ \ \ \ \textcolor{keyword}{class\ }\mbox{\hyperlink{classController_1_1ImportDocCommand}{ImportDocCommand}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{classController_1_1DocCommand}{DocCommand}}\ \{}
+\DoxyCodeLine{00052\ \ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00053\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classController_1_1ImportDocCommand_abd3842aeee0e74bc37d461cf29cc004e}{execute}}(\textcolor{keyword}{const}\ std::string\ \&\ filename)\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00054\ \ \ \ \ \};}
+\DoxyCodeLine{00055\ }
+\DoxyCodeLine{00056\ \ \ \ \ \textcolor{keyword}{class\ }\mbox{\hyperlink{classController_1_1ExportDocCommand}{ExportDocCommand}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{classController_1_1DocCommand}{DocCommand}}\ \{}
+\DoxyCodeLine{00057\ \ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00058\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classController_1_1ExportDocCommand_ad54338f4dbf14413ed8caad98f397ca3}{execute}}(\textcolor{keyword}{const}\ std::string\ \&\ filename)\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00059\ \ \ \ \ \};}
+\DoxyCodeLine{00060\ }
+\DoxyCodeLine{00061\ \ \ \ \ \textcolor{keyword}{class\ }\mbox{\hyperlink{classController_1_1NewDocCommand}{NewDocCommand}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{classController_1_1DocCommand}{DocCommand}}\ \{}
+\DoxyCodeLine{00062\ \ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00063\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classController_1_1NewDocCommand_a16adebb8c03b53ad2c29c2541f0e4631}{execute}}(\textcolor{keyword}{const}\ std::string\ \&\ filename)\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00064\ \ \ \ \ \};}
+\DoxyCodeLine{00065\ }
+\DoxyCodeLine{00066\ \ \ \ \ \textcolor{keyword}{class\ }\mbox{\hyperlink{classController_1_1Renderer}{Renderer}}\ \{}
+\DoxyCodeLine{00067\ \ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00068\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classController_1_1Renderer_a3b151f9c6fc8762220bb3e604fd2405e}{fill}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{structModel_1_1coordinates}{Model::coordinates}}\ \&fillPoint,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{structModel_1_1RGB}{Model::RGB}}\ \&color);}
+\DoxyCodeLine{00069\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classController_1_1Renderer_ab7cc7d3e11d6424d56659a127220faac}{draw}}(\textcolor{keyword}{const}\ std::shared\_ptr<Model::Elem>\ elem);}
+\DoxyCodeLine{00070\ \ \ \ \ \};}
+\DoxyCodeLine{00071\ }
+\DoxyCodeLine{00072\ \ \ \ \ \textcolor{keyword}{class\ }\mbox{\hyperlink{classController_1_1Logic}{Logic}}\ :\ \textcolor{keyword}{public}\ std::enable\_shared\_from\_this<Logic>\{}
+\DoxyCodeLine{00073\ \ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00074\ \ \ \ \ \ \ \ \ std::shared\_ptr<Model::Storage>\ m\_pS;}
+\DoxyCodeLine{00075\ \ \ \ \ \ \ \ \ std::shared\_ptr<View::UI>\ m\_pUI;}
+\DoxyCodeLine{00076\ }
+\DoxyCodeLine{00077\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ for\ ctrl\ Z\ ctrl\ Y}}
+\DoxyCodeLine{00078\ \ \ \ \ \ \ \ \ std::stack<std::shared\_ptr<Controller::DrawCommand>>\ cmdStack;}
+\DoxyCodeLine{00079\ }
+\DoxyCodeLine{00080\ \ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00081\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classController_1_1Logic_af6cb3f486db1fde0acb631ade94711b5}{Logic}}(std::shared\_ptr<Model::Storage>\ pS,\ std::shared\_ptr<View::UI>\ pUI)\ :\ m\_pS(pS),\ m\_pUI(pUI)\ \{\};}
+\DoxyCodeLine{00082\ }
+\DoxyCodeLine{00083\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classController_1_1Logic_a8833d9bb28cd60596653a2e91064d52a}{run}}()\ \{}
+\DoxyCodeLine{00084\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!m\_pUI)\ \{}
+\DoxyCodeLine{00085\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00086\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00087\ }
+\DoxyCodeLine{00088\ \ \ \ \ \ \ \ \ \ \ \ \ m\_pUI-\/>setController(shared\_from\_this());}
+\DoxyCodeLine{00089\ }
+\DoxyCodeLine{00090\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00091\ \ \ \ \ \ \ \ \ \};}
+\DoxyCodeLine{00092\ }
+\DoxyCodeLine{00093\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classController_1_1Logic_a886255058ba32e559baf0d46c1b0e704}{handleMouseDown}}(\textcolor{keywordtype}{int}\ x,\ \textcolor{keywordtype}{int}\ y);}
+\DoxyCodeLine{00094\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classController_1_1Logic_ab553a339247636133b9ebba0640ba070}{handleMouseUp}}(\textcolor{keywordtype}{int}\ x,\ \textcolor{keywordtype}{int}\ y);}
+\DoxyCodeLine{00095\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classController_1_1Logic_a1947dc83d84ec34aaa3edac17e79a94f}{handleMouseMove}}(\textcolor{keywordtype}{int}\ x,\ \textcolor{keywordtype}{int}\ y);}
+\DoxyCodeLine{00096\ }
+\DoxyCodeLine{00097\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classController_1_1Logic_af83768842b973fcc9aae8091f5a79a82}{handleNewDoc}}();}
+\DoxyCodeLine{00098\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classController_1_1Logic_ae67b1fbbab4adde76926a6c9543fac3a}{handleImportDoc}}(\textcolor{keyword}{const}\ std::string\&\ filename);}
+\DoxyCodeLine{00099\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classController_1_1Logic_a45d3f6e96cf318a0490fba35cc4b935b}{handleExportDoc}}(\textcolor{keyword}{const}\ std::string\&\ filename);}
+\DoxyCodeLine{00100\ }
+\DoxyCodeLine{00101\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classController_1_1Logic_ae0068c1c54dd35ebfd8b9e5e0f045209}{execDrawCmd}}(std::shared\_ptr<Controller::DrawCommand>\ pCmd);}
+\DoxyCodeLine{00102\ \ \ \ \ \};}
+\DoxyCodeLine{00103\ }
+\DoxyCodeLine{00104\ \ \ \ \ std::shared\_ptr<Model::Storage>\ \mbox{\hyperlink{namespaceController_a5e25d23f3bd88c5f2e111553cdf3b20a}{createStorage}}()\ \{}
+\DoxyCodeLine{00105\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ std::make\_shared<Model::Storage>();}
+\DoxyCodeLine{00106\ \ \ \ \ \}}
+\DoxyCodeLine{00107\ }
+\DoxyCodeLine{00108\ \ \ \ \ std::shared\_ptr<View::UI>\ \mbox{\hyperlink{namespaceController_a34cb9a4c850668a645641b0234ef86c6}{createUI}}()\ \{}
+\DoxyCodeLine{00109\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ std::make\_shared<View::UI>();}
+\DoxyCodeLine{00110\ \ \ \ \ \}}
+\DoxyCodeLine{00111\ }
+\DoxyCodeLine{00112\ \}}
+
+\end{DoxyCode}

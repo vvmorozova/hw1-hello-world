@@ -1,0 +1,93 @@
+\doxysection{model.\+h}
+\hypertarget{model_8h_source}{}\label{model_8h_source}\mbox{\hyperlink{model_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#include\ <memory>}}
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ <iostream>}}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <vector>}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <stack>}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ <queue>}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ <string>}}
+\DoxyCodeLine{00008\ }
+\DoxyCodeLine{00009\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespaceModel}{Model}}\ \{}
+\DoxyCodeLine{00010\ \ \ \ \ \textcolor{keyword}{enum\ class}\ \mbox{\hyperlink{namespaceModel_ac1b98e754b13872ee54290cb49ef74f2}{currElemTypeToDraw}}\ \{}
+\DoxyCodeLine{00011\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classModel_1_1Line}{Line}},}
+\DoxyCodeLine{00012\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classModel_1_1Circle}{Circle}},}
+\DoxyCodeLine{00013\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classModel_1_1Rectangle}{Rectangle}}}
+\DoxyCodeLine{00014\ \ \ \ \ \};}
+\DoxyCodeLine{00015\ \ \ \ \ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structModel_1_1coordinates}{coordinates}}\ \{}
+\DoxyCodeLine{00016\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{structModel_1_1coordinates_ae95bbfec52938635d38a5f26936a8632}{x}};}
+\DoxyCodeLine{00017\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{structModel_1_1coordinates_acc4866bbefe598834d2c2f1abd850a97}{y}};}
+\DoxyCodeLine{00018\ \ \ \ \ \};}
+\DoxyCodeLine{00019\ }
+\DoxyCodeLine{00020\ \ \ \ \ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structModel_1_1RGB}{RGB}}\ \{}
+\DoxyCodeLine{00021\ \ \ \ \ \ \ \ \ uint8\_t\ \mbox{\hyperlink{structModel_1_1RGB_ad6f7adf0a6e117da84a96404a938009a}{r}};}
+\DoxyCodeLine{00022\ \ \ \ \ \ \ \ \ uint8\_t\ \mbox{\hyperlink{structModel_1_1RGB_ac65a034199538a6e78b8a0b179ed2376}{g}};}
+\DoxyCodeLine{00023\ \ \ \ \ \ \ \ \ uint8\_t\ \mbox{\hyperlink{structModel_1_1RGB_a3269216ed9eaf788b38f529d5e78e8d8}{b}};}
+\DoxyCodeLine{00024\ \ \ \ \ \};}
+\DoxyCodeLine{00025\ }
+\DoxyCodeLine{00026\ }
+\DoxyCodeLine{00027\ \ \ \ \ \textcolor{keyword}{class\ }\mbox{\hyperlink{classModel_1_1Elem}{Elem}}\ \{}
+\DoxyCodeLine{00028\ \ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00029\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{structModel_1_1coordinates}{coordinates}}\ basePoint;}
+\DoxyCodeLine{00030\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{structModel_1_1RGB}{RGB}}\ color;}
+\DoxyCodeLine{00031\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ layer;}
+\DoxyCodeLine{00032\ }
+\DoxyCodeLine{00033\ \ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00034\ \ \ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ \mbox{\hyperlink{classModel_1_1Elem_a63abe3dd800e9cb0b10dcbb29f116907}{\string~Elem}}()\ \{\};}
+\DoxyCodeLine{00035\ }
+\DoxyCodeLine{00036\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classModel_1_1Elem_a4f15968a304e49beb2d1bb92fee13f80}{setBasePoint}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{structModel_1_1coordinates}{coordinates}}\ \&newBasePoint);}
+\DoxyCodeLine{00037\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{structModel_1_1coordinates}{coordinates}}\ \mbox{\hyperlink{classModel_1_1Elem_a7b5a100dd31fd9b625a283a12ab68be0}{getBasePoint}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00038\ }
+\DoxyCodeLine{00039\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classModel_1_1Elem_acba1bb394066ad37dfe5d35554e26920}{setColor}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{structModel_1_1RGB}{RGB}}\ \&newColor);}
+\DoxyCodeLine{00040\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{structModel_1_1RGB}{RGB}}\ \mbox{\hyperlink{classModel_1_1Elem_a4194f50655bc5c3b4d459f32e1ea2984}{getColor}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00041\ }
+\DoxyCodeLine{00042\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classModel_1_1Elem_a9a2da9a1faa7f9bfaba89a7e8c0f3d1f}{setLayer}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ newLayer);}
+\DoxyCodeLine{00043\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classModel_1_1Elem_ab1210cbafe1946f3fdaa267b208076d0}{getLayer}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00044\ \ \ \ \ \};}
+\DoxyCodeLine{00045\ }
+\DoxyCodeLine{00046\ \ \ \ \ \textcolor{keyword}{class\ }\mbox{\hyperlink{classModel_1_1Line}{Line}}:\ \textcolor{keyword}{public}\ \mbox{\hyperlink{classModel_1_1Elem}{Elem}}\ \{}
+\DoxyCodeLine{00047\ \ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00048\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{structModel_1_1coordinates}{coordinates}}\ secondPoint;}
+\DoxyCodeLine{00049\ }
+\DoxyCodeLine{00050\ \ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00051\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classModel_1_1Line_a18cf16768eae4da24174b085b6bd348e}{setSecondPoint}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{structModel_1_1coordinates}{coordinates}}\ \&newSecondPoint);}
+\DoxyCodeLine{00052\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{structModel_1_1coordinates}{coordinates}}\ \mbox{\hyperlink{classModel_1_1Line_a92adb7e09c3223e6fe47c2d7226c25de}{getSecondPoint}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00053\ \ \ \ \ \};}
+\DoxyCodeLine{00054\ }
+\DoxyCodeLine{00055\ \ \ \ \ \textcolor{keyword}{class\ }\mbox{\hyperlink{classModel_1_1Circle}{Circle}}:\ \textcolor{keyword}{public}\ \mbox{\hyperlink{classModel_1_1Elem}{Elem}}\ \{}
+\DoxyCodeLine{00056\ \ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00057\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ radius;}
+\DoxyCodeLine{00058\ }
+\DoxyCodeLine{00059\ \ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00060\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classModel_1_1Circle_a3877759a052a170ffc3d2b4b7bc406cd}{setRadius}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ \&newRadius);}
+\DoxyCodeLine{00061\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classModel_1_1Circle_a6b6ecf4ac2e39a2d4184b50ae2e9646b}{getRadius}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00062\ \ \ \ \ \};}
+\DoxyCodeLine{00063\ }
+\DoxyCodeLine{00064\ \ \ \ \ \textcolor{keyword}{class\ }\mbox{\hyperlink{classModel_1_1Rectangle}{Rectangle}}:\ \textcolor{keyword}{public}\ \mbox{\hyperlink{classModel_1_1Elem}{Elem}}\ \{}
+\DoxyCodeLine{00065\ \ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00066\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{structModel_1_1coordinates}{coordinates}}\ secondPoint;}
+\DoxyCodeLine{00067\ }
+\DoxyCodeLine{00068\ \ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00069\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classModel_1_1Rectangle_a2ff0b10ac1a02bf757b0229e7304a1f1}{setSecondPoint}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{structModel_1_1coordinates}{coordinates}}\ \&newSecondPoint);}
+\DoxyCodeLine{00070\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{structModel_1_1coordinates}{coordinates}}\ \mbox{\hyperlink{classModel_1_1Rectangle_a4f4eacab1028aea021b35b39551e034f}{getSecondPoint}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00071\ \ \ \ \ \};}
+\DoxyCodeLine{00072\ }
+\DoxyCodeLine{00073\ \ \ \ \ \textcolor{keyword}{class\ }\mbox{\hyperlink{classModel_1_1Storage}{Storage}}\ \{}
+\DoxyCodeLine{00074\ \ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00075\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespaceModel_ac1b98e754b13872ee54290cb49ef74f2}{currElemTypeToDraw}}\ currType;}
+\DoxyCodeLine{00076\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ vector\ of\ already\ drawed\ elems}}
+\DoxyCodeLine{00077\ \ \ \ \ \ \ \ \ std::vector<std::shared\_ptr<Elem>>\ painted;}
+\DoxyCodeLine{00078\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ cached\ last\ opened/exported\ file's\ names}}
+\DoxyCodeLine{00079\ \ \ \ \ \ \ \ \ std::queue<std::string>\ lastFiles;}
+\DoxyCodeLine{00080\ \ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00081\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classModel_1_1Storage_af52a12416b85f87be8e4c487f7ddb7cf}{setCurrElemTypeToDraw}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{namespaceModel_ac1b98e754b13872ee54290cb49ef74f2}{currElemTypeToDraw}}\ \&type);}
+\DoxyCodeLine{00082\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespaceModel_ac1b98e754b13872ee54290cb49ef74f2}{currElemTypeToDraw}}\ \mbox{\hyperlink{classModel_1_1Storage_a883de6c95daac2996f3fde5c170a6c30}{getCurrElemTypeToDraw}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00083\ \ \ \ \ }
+\DoxyCodeLine{00084\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classModel_1_1Storage_a7855fd1c6e8452e6b50f8fac14abdfe5}{addElem}}(std::shared\_ptr<Elem>);}
+\DoxyCodeLine{00085\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classModel_1_1Storage_a158292f944e70f0b84c2ac39cd059ce9}{removeElem}}(std::shared\_ptr<Elem>);}
+\DoxyCodeLine{00086\ \ \ \ \ }
+\DoxyCodeLine{00087\ \ \ \ \ \};}
+\DoxyCodeLine{00088\ \}}
+
+\end{DoxyCode}
