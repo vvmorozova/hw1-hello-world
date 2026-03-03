@@ -10,22 +10,22 @@ set(INC_DIR "./inc")
 
 file(GLOB_RECURSE SRC_FILES "${SRC_DIR}/*.cpp")
 
-add_executable(editor_cli ${SRC_FILES})
+add_executable(matrix_cli ${SRC_FILES})
 
-target_include_directories(editor_cli PRIVATE ${INC_DIR})
+target_include_directories(matrix_cli PRIVATE ${INC_DIR})
 
-set_target_properties(editor_cli PROPERTIES
+set_target_properties(matrix_cli PROPERTIES
     CXX_STANDARD 14
     CXX_STANDARD_REQUIRED ON
 )
 
 if (MSVC)
-    target_compile_options(editor_cli PRIVATE /W4)
+    target_compile_options(matrix_cli PRIVATE /W4)
 else()
-    target_compile_options(editor_cli PRIVATE -Wall -Wextra -pedantic -Werror)
+    target_compile_options(matrix_cli PRIVATE -Wall -Wextra -pedantic -Werror)
 endif()
 
-install(TARGETS editor_cli RUNTIME DESTINATION bin)
+install(TARGETS matrix_cli RUNTIME DESTINATION bin)
 
 set(CPACK_GENERATOR DEB)
 set(CPACK_PACKAGE_VERSION_MAJOR "${PROJECT_VERSION_MAJOR}")
