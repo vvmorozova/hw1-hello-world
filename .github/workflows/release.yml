@@ -5,7 +5,7 @@ on:
     branches:
       - master
       - feature/github_actions
-      - hw5_editor
+      - hw6_matrix
 
 jobs:
   build:
