@@ -1,12 +1,20 @@
-#include "unordered_map"
-#include "vector"
+#include <unordered_map>
+#include <vector>
 #include <iostream>
+#include <iomanip>
+#include <bit>
+#include <bitset>
 
 template <typename T, T defValue>
 class Matrix {
 private:
 	
-	std::unordered_map<int, std::unordered_map<int, T>> m_mapData;
+	struct pairHash {
+		std::size_t operator() (const std::pair<int,int>& p) const {
+			return std::hash<int>{}(p.first) ^ std::hash<int>{}(p.second);
+		}
+	};
+	std::unordered_map<std::pair<int,int>, T, pairHash> m_mapData;
 
 	int m_size;
 	T m_defVal;
@@ -15,50 +23,72 @@ private:
 public:
 	//int size();
 
-	Matrix() : m_defVal(defValue) {};
+	Matrix() : m_defVal(defValue), m_occCells(0) {};
+
+	class CellProxy {
+	private:
+		Matrix &m_mat;
+		int m_row, m_col;
+	public:
+		CellProxy(Matrix &mat, int row, int col) : m_mat(mat), m_row(row), m_col(col) {}
+
+		CellProxy& operator=(const T&val) {
+			if (val == defValue) {
+				m_mat.m_mapData.erase({m_row, m_col});
+				m_mat.m_occCells--;
+			}
+			else {
+				m_mat.m_mapData[{m_row, m_col}] = val;
+				m_mat.m_occCells++;
+			}
+			return *this;
+		}
+
+		operator T() const {
+			auto it = m_mat.m_mapData.find({m_row, m_col});
+			return it != m_mat.m_mapData.end() ? it->second : defValue;
+		}
+	};
 
 	class RowProxy {
 	private:
-		std::unordered_map<int, T>&row;
-		T &defVal;
-	public:
-		RowProxy(std::unordered_map<int, T> &r, T &m_defVal) : row(r), defVal(m_defVal) {}
+		int m_row;
+		Matrix &m_mat;
 
-		T& operator[](std::size_t col) {
-			return row.find(col) == row.end() ? defVal : row.at(col);
+	public:
+		RowProxy(Matrix &m, int row) : m_row(row), m_mat(m) {}
+
+		CellProxy operator[](int col) {
+			return CellProxy(m_mat, m_row, col);
 		}
 	};
 
 	RowProxy operator[](std::size_t row) {
-		return RowProxy(m_mapData.at(row), m_defVal);
+		return RowProxy(*this, row);
 	}
 
-	const RowProxy operator[](std::size_t row) const {
-		return RowProxy(const_cast<std::unordered_map<int, T>&>(m_mapData.at(row)), m_defVal);
-	}
-
-	void print(int row, int col)
+	void print(int low, int high)
 	{
-		for (int i = 0; i < row; i++) {
-			for (int j = 0; j < col; j++) {
-				if (m_mapData.find(i) != m_mapData.end()) {
-					auto elem = m_mapData.find(i)->second;
-					if (elem.find(j) != elem.end()) {
-						std::cout << j << " ";
-					}
-					else {
-						std::cout << m_defVal;
-					}
-				}
-				else {
-
-					std::cout << m_defVal;
-				}
+		for (int i = low; i <= high; i++) {
+			for (int j = low; j <= high; j++) {
+				std::cout << std::setw(3) << (*this)[i][j] << " ";
 			}
+			std::cout << std::endl;
 		}
 	}
 
-	//void printOcc();
+	int getOcc() const
+	{
+		return m_occCells;
+	}
 
-	//operator=
+	auto begin()
+	{
+		return m_mapData.begin();
+	}
+
+	auto end()
+	{
+		return m_mapData.end();
+	}
 };

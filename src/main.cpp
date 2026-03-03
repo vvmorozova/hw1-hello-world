@@ -8,10 +8,23 @@ int main(int, char **) {
 	
 	Matrix<int, -1> mat;
 
-	mat[10][2] = 9;
-	//mat[2][3] = 4;
+	for (int i = 0; i < 10; i++) {
+		mat[i][i] = i;
+		mat[i][9 - i] = 9 - i;
+	}
 
-	//mat.print(11, 11);
+	std::cout << "Matrix [1,1] to [8,8]" << std::endl;
+	mat.print(1, 8);
+	std::cout << std::endl;
+
+	std::cout << mat.getOcc() << " occupied cells" << std::endl;
+	std::cout << std::endl;
+
+	std::cout << "Occupied cells" << std::endl;
+	for (auto cell : mat) {
+		std::cout << "mat[" << cell.first.first <<  "][" << cell.first.second << "] = "
+		<< cell.second << std::endl;
+	}
 	return 0;
 } 
 
