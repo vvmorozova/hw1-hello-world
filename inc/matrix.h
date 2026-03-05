@@ -18,12 +18,9 @@ private:
 
 	int m_size;
 	T m_defVal;
-	int m_occCells;
 	
 public:
-	//int size();
-
-	Matrix() : m_defVal(defValue), m_occCells(0) {};
+	Matrix() : m_defVal(defValue) {};
 
 	class CellProxy {
 	private:
@@ -35,11 +32,9 @@ public:
 		CellProxy& operator=(const T&val) {
 			if (val == defValue) {
 				m_mat.m_mapData.erase({m_row, m_col});
-				m_mat.m_occCells--;
 			}
 			else {
 				m_mat.m_mapData[{m_row, m_col}] = val;
-				m_mat.m_occCells++;
 			}
 			return *this;
 		}
@@ -79,7 +74,7 @@ public:
 
 	int getOcc() const
 	{
-		return m_occCells;
+		return m_mapData.size();
 	}
 
 	auto begin()

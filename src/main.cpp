@@ -6,7 +6,7 @@
 
 int main(int, char **) {
 	
-	Matrix<int, -1> mat;
+	Matrix<int, 0> mat;
 
 	for (int i = 0; i < 10; i++) {
 		mat[i][i] = i;
