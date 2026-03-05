@@ -35,6 +35,16 @@ void DataStorage::setBrackets(int brackets)
 	m_brackets = brackets;
 }
 
+void DataStorage::decBrackets()
+{
+	m_brackets--;
+}
+
+void DataStorage::incBrackets()
+{
+	m_brackets++;
+}
+
 int DataStorage::getBrackets()
 {
 	return m_brackets;

@@ -22,6 +22,8 @@ public:
 
 	void setBrackets(int);
 	int getBrackets();
+	void decBrackets();
+	void incBrackets();
 
 	void setBlockLen(int);
 	int getBlockLen();
