@@ -1,4 +1,6 @@
 #include "InputHandler.h"
+#include "Writer.h"
+
 #include <string>
 #include <iostream>
 #include <chrono>
@@ -29,14 +31,7 @@ void InputHandler::handle(std::string input)
 			}
 			m_pData->addToPackCmd(input);
 			if (m_pData->getPackCmdSize() == (int)m_pData->getBlockLen()) {
-				std::ofstream out;
-				out.open(m_pData->getFilename());
-				if (out.is_open()) {
-					for (const auto & cmd: m_pData->getPackCmd()) {
-						out << cmd << ", ";
-					}
-					out.close();
-				}
+				Writer::writeResult(m_pData->getFilename(), m_pData->getPackCmd());
 				m_pData->clearPackCmd();
 			}
 		}
