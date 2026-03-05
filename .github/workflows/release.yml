@@ -5,7 +5,7 @@ on:
     branches:
       - master
       - feature/github_actions
-      - hw6_matrix
+      - hw7_parser
 
 jobs:
   build:
