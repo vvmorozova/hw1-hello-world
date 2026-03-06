@@ -53,6 +53,7 @@ void InputHandler::generateFilename()
 
 void InputHandler::handleWriteRes()
 {
-	Writer::writeResult(m_pData->getFilename(), m_pData->getPackCmd());
+	Writer::writeResultToFile(m_pData->getFilename(), m_pData->getPackCmd());
+	Writer::writeResultStream(std::cout, m_pData->getPackCmd());
 	m_pData->clearPackCmd();
 }

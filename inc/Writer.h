@@ -4,5 +4,6 @@
 #include <vector>
 
 namespace Writer {
-	void writeResult(const std::string &filename, const std::vector<std::string> &result);
+	void writeResultToFile(const std::string &filename, const std::vector<std::string> &result);
+	void writeResultStream(std::ostream &out, const std::vector<std::string> &result);
 };
