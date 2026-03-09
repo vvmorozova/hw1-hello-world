@@ -29,14 +29,7 @@ else()
     target_compile_options(matrix_cli PRIVATE -Wall -Wextra -pedantic -Werror -g)
 endif()
 
-install(TARGETS matrix_cli RUNTIME DESTINATION bin)
 
-set(CPACK_GENERATOR DEB)
-set(CPACK_PACKAGE_VERSION_MAJOR "${PROJECT_VERSION_MAJOR}")
-set(CPACK_PACKAGE_VERSION_MINOR "${PROJECT_VERSION_MINOR}")
-set(CPACK_PACKAGE_VERSION_PATCH "${PROJECT_VERSION_PATCH}")
-set(CPACK_PACKAGE_CONTACT "vvmorozova_1@edu.hse.ru")
-include(CPack)
 
 set(INSTALL_GTEST OFF CACHE BOOL "" FORCE)
 add_subdirectory(./googletest)
@@ -56,3 +49,12 @@ endif()
 
 include(GoogleTest)
 gtest_discover_tests(matrix_test)
+
+install(TARGETS matrix_cli matrix_test RUNTIME DESTINATION bin)
+
+set(CPACK_GENERATOR DEB)
+set(CPACK_PACKAGE_VERSION_MAJOR "${PROJECT_VERSION_MAJOR}")
+set(CPACK_PACKAGE_VERSION_MINOR "${PROJECT_VERSION_MINOR}")
+set(CPACK_PACKAGE_VERSION_PATCH "${PROJECT_VERSION_PATCH}")
+set(CPACK_PACKAGE_CONTACT "vvmorozova_1@edu.hse.ru")
+include(CPack)
