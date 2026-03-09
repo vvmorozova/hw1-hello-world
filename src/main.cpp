@@ -6,7 +6,7 @@
 
 int main(int, char **) {
 	
-	Matrix<int, 0> mat;
+	/*Matrix<int, 0> mat;
 
 	for (int i = 0; i < 10; i++) {
 		mat[i][i] = i;
@@ -24,7 +24,13 @@ int main(int, char **) {
 	for (auto cell : mat) {
 		std::cout << "mat[" << cell.first.first <<  "][" << cell.first.second << "] = "
 		<< cell.second << std::endl;
-	}
+	}*/
+
+	std::unique_ptr<Matrix<int, 0>> m = std::make_unique<Matrix<int, 0>>();
+	(*m)[0][0] = 2;
+	auto proxy = (*m)[0];
+	m.reset();
+	std::cout << proxy[0] << std::endl;
 	return 0;
 } 
 
