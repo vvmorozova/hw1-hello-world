@@ -6,6 +6,10 @@
 
 void Writer::writeResultToFile(const std::string &filename, const std::vector<std::string> &result)
 {
+	if (result.size() == 0) {
+		return;
+	}
+	
 	std::ofstream out;
 	out.open(filename);
 	if (out.is_open()) {
@@ -16,6 +20,10 @@ void Writer::writeResultToFile(const std::string &filename, const std::vector<st
 
 void Writer::writeResultStream(std::ostream &out, const std::vector<std::string> &result)
 {
+	if (result.size() == 0) {
+		return;
+	}
+
 	int size = result.size();
 	if (out.rdbuf() == (std::cout).rdbuf()) {
 		std::cout << "bulk: ";
