@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.12)
 
 set(PATCH_VERSION "1" CACHE INTERNAL "Patch version")
 set(PROJECT_VERSION 0.0.${PATCH_VERSION})
-project(editor VERSION ${PROJECT_VERSION})
+project(matrix VERSION ${PROJECT_VERSION})
 
 set(SRC_DIR "./src")
 set(INC_DIR "./inc")
