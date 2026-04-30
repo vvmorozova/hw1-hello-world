@@ -78,8 +78,9 @@ block_hash reader::next_block()
     // open on first read
     if (!stream_.is_open()) {
         stream_.open(path_.string(), std::ios::binary);
-        if (!stream_)
+        if (!stream_) {
             throw std::runtime_error("cannot open file: " + path_.string());
+        }
     }
 
     std::vector<char> buf(block_size_, '\0');
@@ -100,6 +101,8 @@ void reader::reset()
 
 std::size_t reader::block_count() const
 {
-    if (file_size_ == 0) return 1; // empty file = one all-zero block
+    if (file_size_ == 0) {
+        return 1; // empty file = one all-zero block
+    }
     return (file_size_ + block_size_ - 1) / block_size_;
 }

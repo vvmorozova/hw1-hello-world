@@ -17,12 +17,12 @@ int main(int argc, char** argv) {
         // find duplicates
         auto duplicates = comparator::find_duplicates(readers);
         
-        // print res
+        // print results
         if (duplicates.empty()) {
-            std::cout << "No duplicates found.\n";
+            std::cout << "no duplicates found.\n";
         } else {
             for (const auto& group : duplicates) {
-                std::cout << "Duplicate group:\n";
+                std::cout << "duplicate group:\n";
                 for (const auto& path : group) {
                     std::cout << "  " << path.string() << "\n";
                 }
@@ -36,7 +36,7 @@ int main(int argc, char** argv) {
         std::cerr << e.what() << "\n";
         return 1;
     } catch (const std::exception& e) {
-        std::cerr << "Error: " << e.what() << "\n";
+        std::cerr << "error: " << e.what() << "\n";
         return 1;
     }
     

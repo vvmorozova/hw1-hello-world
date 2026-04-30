@@ -12,9 +12,7 @@
 
 namespace fs = boost::filesystem;
 
-// ---------------------------------------------------------------------------
 // test fixture: temporary directory tree
-// ---------------------------------------------------------------------------
 class file_system_test : public ::testing::Test {
 protected:
     void SetUp() override
@@ -51,13 +49,13 @@ protected:
     fs::path root_;
 };
 
-// ---------------------------------------------------------------------------
+//           
 // reader tests
-// ---------------------------------------------------------------------------
+//           
 
 class reader_test : public file_system_test {};
 
-// --- construction ---
+// construction
 
 TEST_F(reader_test, total_blocks_exact_multiple)
 {
@@ -100,7 +98,7 @@ TEST_F(reader_test, block_size_one_byte_exact)
     EXPECT_EQ(r.total_blocks(), 3u);
 }
 
-// --- lazy open: no i/o before nextBlock() ---
+// lazy open: no i/o before nextBlock() 
 
 TEST_F(reader_test, not_exhausted_before_reading)
 {
@@ -110,7 +108,7 @@ TEST_F(reader_test, not_exhausted_before_reading)
     EXPECT_EQ(r.current_index(), 0u);
 }
 
-// --- nextBlock() ---
+// nextBlock() 
 
 TEST_F(reader_test, read_single_block)
 {
@@ -184,7 +182,7 @@ TEST_F(reader_test, md5_hash_works)
     EXPECT_EQ(h.size(), 16u); // md5 = 16 bytes
 }
 
-// --- reset() ---
+//  reset() 
 
 TEST_F(reader_test, reset_allows_rereading)
 {

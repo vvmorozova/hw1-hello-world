@@ -13,9 +13,9 @@
 
 namespace fs = boost::filesystem;
 
-// ---------------------------------------------------------------------------
+//           
 // test fixture: temporary directory tree
-// ---------------------------------------------------------------------------
+//           
 class file_system_test : public ::testing::Test {
 protected:
     void SetUp() override
@@ -52,9 +52,9 @@ protected:
     fs::path root_;
 };
 
-// ---------------------------------------------------------------------------
+//           
 // storage tests
-// ---------------------------------------------------------------------------
+//           
 
 class storage_test : public file_system_test {
 protected:
