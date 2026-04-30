@@ -47,10 +47,10 @@ inline block_hash reader::compute_hash(const std::vector<char>& buf, hash_func a
 
 
 reader::reader(fs::path path, std::size_t blockSize, hash_func algo)
-    : path_(std::move(path)), blockSize_(blockSize), algo_(algo),
-    blockIndex_(0), fileSize_(fs::file_size(path_)), totalBlocks_(block_count())
+    : path_(std::move(path)), block_size_(blockSize), algo_(algo),
+    block_index_(0), file_size_(fs::file_size(path_)), total_blocks_(block_count())
 {
-    if (blockSize_ == 0)
+    if (block_size_ == 0)
         throw std::invalid_argument("block size must be > 0");
 }
 
@@ -58,16 +58,16 @@ const fs::path& reader::path() const {
     return path_;
 }
 
-std::size_t reader::totalBlocks() const {
-    return totalBlocks_;
+std::size_t reader::total_blocks() const {
+    return total_blocks_;
 }
 
-std::size_t reader::currentIndex() const {
-    return blockIndex_;
+std::size_t reader::current_index() const {
+    return block_index_;
 }
 
 bool reader::exhausted() const {
-    return blockIndex_ >= totalBlocks_;
+    return block_index_ >= total_blocks_;
 }
 
 block_hash reader::next_block()
@@ -82,17 +82,17 @@ block_hash reader::next_block()
             throw std::runtime_error("cannot open file: " + path_.string());
     }
 
-    std::vector<char> buf(blockSize_, '\0');
-    stream_.read(buf.data(), static_cast<std::streamsize>(blockSize_));
+    std::vector<char> buf(block_size_, '\0');
+    stream_.read(buf.data(), static_cast<std::streamsize>(block_size_));
     // partial read on last block is fine; rest of buf is already zero
 
-    ++blockIndex_;
+    ++block_index_;
     return compute_hash(buf, algo_);
 }
 
 void reader::reset()
 {
-    blockIndex_ = 0;
+    block_index_ = 0;
     if (stream_.is_open()) {
         stream_.close();
     }
@@ -100,6 +100,6 @@ void reader::reset()
 
 std::size_t reader::block_count() const
 {
-    if (fileSize_ == 0) return 1; // empty file = one all-zero block
-    return (fileSize_ + blockSize_ - 1) / blockSize_;
+    if (file_size_ == 0) return 1; // empty file = one all-zero block
+    return (file_size_ + block_size_ - 1) / block_size_;
 }

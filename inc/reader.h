@@ -19,10 +19,10 @@ public:
     const fs::path& path() const;
 
     // total number of blocks (ceil(fileSize / blockSize), min 1)
-    std::size_t totalBlocks() const;
+    std::size_t total_blocks() const;
 
     // index of the next block to be read (0-based)
-    std::size_t currentIndex() const;
+    std::size_t current_index() const;
 
     // true if all blocks have been read
     bool exhausted() const;
@@ -35,10 +35,10 @@ private:
     std::size_t block_count() const;
 
     fs::path        path_;
-    std::size_t     blockSize_;
+    std::size_t     block_size_;
     hash_func       algo_;
-    std::size_t     blockIndex_;
-    std::uintmax_t  fileSize_;
-    std::size_t     totalBlocks_;
+    std::size_t     block_index_;
+    std::uintmax_t  file_size_;
+    std::size_t     total_blocks_;
     std::ifstream   stream_;
 };
