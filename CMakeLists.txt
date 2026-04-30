@@ -13,9 +13,12 @@ file(GLOB_RECURSE TEST_FILES "${TEST_DIR}/*.cpp")
 find_package(Boost REQUIRED)
 find_package(GTest REQUIRED)
 
+find_package(Boost REQUIRED COMPONENTS program_options filesystem)
+
 add_executable(${PROJECT_NAME} ${SRC_FILES})
 target_include_directories(${PROJECT_NAME} PRIVATE ${INC_DIR} ${Boost_INCLUDE_DIRS})
-target_link_libraries(${PROJECT_NAME} PRIVATE ${Boost_LIBRARIES})
+target_link_libraries(${PROJECT_NAME} PRIVATE ${Boost_LIBRARIES} Boost::program_options Boost::filesystem)
+
 set_target_properties(${PROJECT_NAME} PROPERTIES
     CXX_STANDARD 14
     CXX_STANDARD_REQUIRED ON
