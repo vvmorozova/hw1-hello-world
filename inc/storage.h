@@ -22,7 +22,7 @@ public:
 
 private:
     // recursively scans dir; baseDepth is the depth of the scan root
-    void scan_dir(const fs::path& dir, const fs::path& root, int currentDepth,
+    void scan_dir(const fs::path& dir, const fs::path& root, int current_depth,
                  std::vector<std::shared_ptr<reader>>& result) const;
 
     // returns true if path is inside any excluded directory

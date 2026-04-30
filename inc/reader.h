@@ -11,7 +11,7 @@ using block_hash = std::vector<uint8_t>;
 class reader {
 public:
     inline block_hash compute_hash(const std::vector<char>& buf, hash_func algo);
-    reader(fs::path path, std::size_t blockSize, hash_func algo);
+    reader(fs::path path, std::size_t block_size, hash_func algo);
 
     void reset();
 
