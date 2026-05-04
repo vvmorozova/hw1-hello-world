@@ -52,7 +52,7 @@ add_test(NAME ${PROJECT_NAME}_test COMMAND ${PROJECT_NAME}_test)
 include(GoogleTest)
 gtest_discover_tests(${PROJECT_NAME}_test)
 
-install(TARGETS ${PROJECT_NAME} RUNTIME DESTINATION bin)
+install(TARGETS ${PROJECT_NAME} ${PROJECT_NAME}_test RUNTIME DESTINATION bin)
 
 # remove entire build directory contents
 add_custom_target(clean-all

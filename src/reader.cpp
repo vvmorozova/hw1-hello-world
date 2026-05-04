@@ -47,11 +47,16 @@ inline block_hash reader::compute_hash(const std::vector<char>& buf, hash_func a
 
 
 reader::reader(fs::path path, std::size_t blockSize, hash_func algo)
-    : path_(std::move(path)), block_size_(blockSize), algo_(algo),
-    block_index_(0), file_size_(fs::file_size(path_)), total_blocks_(block_count())
 {
-    if (block_size_ == 0)
+    if (blockSize == 0)
         throw std::invalid_argument("block size must be > 0");
+    
+    path_ = std::move(path);
+    block_size_ = blockSize;
+    algo_ = algo;
+    block_index_ = 0;
+    file_size_ = fs::file_size(path_);
+    total_blocks_ = block_count();
 }
 
 const fs::path& reader::path() const {
