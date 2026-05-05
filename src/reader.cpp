@@ -45,7 +45,6 @@ inline block_hash reader::compute_hash(const std::vector<char>& buf, hash_func a
     return h;
 }
 
-
 reader::reader(fs::path path, std::size_t blockSize, hash_func algo)
 {
     if (blockSize == 0)

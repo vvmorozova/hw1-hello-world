@@ -49,9 +49,7 @@ protected:
     fs::path root_;
 };
 
-//           
 // reader tests
-//           
 
 class reader_test : public file_system_test {};
 
